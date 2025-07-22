@@ -1,0 +1,33 @@
+.skin-quiz-menu {
+  border: 1px solid white;
+  padding: 5px;
+  border-radius: 2px;
+  display: inline-block;
+}
+.mega-menu__link--parent {
+  font-weight: 900 !important;
+  padding-bottom: 30px;
+  position: relative;
+}
+@media (min-width: 1025px) {
+  .menu-list__submenu-inner {
+    padding-left: 620px;
+  }
+}
+
+.menu-list__dropdown-caret {
+  margin-left: 0.5rem;
+  transition: transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.menu-list__link:hover .menu-list__dropdown-caret,
+.menu-list__link[aria-expanded="true"] .menu-list__dropdown-caret {
+  transform: rotate(180deg);
+}
+
+.menu-list__dropdown-caret svg {
+  width: 12px;
+  height: 8px;
+}
