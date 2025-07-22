@@ -1,0 +1,631 @@
+<!-- sections/skincare-quiz.liquid -->
+<div class="skincare-quiz-wrapper" data-section-id="{{ section.id }}">
+  <div class="quiz-container">
+    <!-- Quiz Header -->
+    <div class="quiz-header">
+      <div class="quiz-icon">✨</div>
+      <h2 class="quiz-title">{{ section.settings.quiz_title }}</h2>
+      <p class="quiz-subtitle">{{ section.settings.quiz_subtitle }}</p>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <!-- Quiz Questions -->
+    <div class="quiz-content">
+      <!-- Question 1: Skin Type -->
+      <div class="question-slide active" data-question="1">
+        <h3 class="question-title">What's your skin type?</h3>
+        <div class="options-grid">
+          <div class="option-card" data-value="oily">
+            <h4>Oily</h4>
+            <p>Shiny T-zone, large pores, frequent breakouts</p>
+          </div>
+          <div class="option-card" data-value="dry">
+            <h4>Dry</h4>
+            <p>Tight feeling, flaky, rough texture</p>
+          </div>
+          <div class="option-card" data-value="combination">
+            <h4>Combination</h4>
+            <p>Oily T-zone, normal to dry cheeks</p>
+          </div>
+          <div class="option-card" data-value="sensitive">
+            <h4>Sensitive</h4>
+            <p>Easily irritated, redness, reactions</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 2: Primary Concern -->
+      <div class="question-slide" data-question="2">
+        <h3 class="question-title">What's your primary skin concern?</h3>
+        <div class="options-grid">
+          <div class="option-card" data-value="acne">
+            <h4>Acne & Breakouts</h4>
+            <p>Blackheads, whiteheads, inflamed pimples</p>
+          </div>
+          <div class="option-card" data-value="aging">
+            <h4>Anti-Aging</h4>
+            <p>Fine lines, wrinkles, loss of firmness</p>
+          </div>
+          <div class="option-card" data-value="hyperpigmentation">
+            <h4>Dark Spots</h4>
+            <p>Uneven tone, age spots, melasma</p>
+          </div>
+          <div class="option-card" data-value="dullness">
+            <h4>Dullness</h4>
+            <p>Lack of radiance, uneven texture</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 3: Age Range -->
+      <div class="question-slide" data-question="3">
+        <h3 class="question-title">What's your age range?</h3>
+        <div class="options-grid">
+          <div class="option-card" data-value="teens">
+            <h4>Under 18</h4>
+            <p>Teen skin with hormonal changes</p>
+          </div>
+          <div class="option-card" data-value="twenties">
+            <h4>18-29</h4>
+            <p>Prevention and maintenance focus</p>
+          </div>
+          <div class="option-card" data-value="thirties">
+            <h4>30-39</h4>
+            <p>Early signs of aging prevention</p>
+          </div>
+          <div class="option-card" data-value="forties-plus">
+            <h4>40+</h4>
+            <p>Advanced anti-aging treatments</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 4: Routine Experience -->
+      <div class="question-slide" data-question="4">
+        <h3 class="question-title">How experienced are you with skincare?</h3>
+        <div class="options-grid">
+          <div class="option-card" data-value="beginner">
+            <h4>Beginner</h4>
+            <p>New to skincare, want simple routine</p>
+          </div>
+          <div class="option-card" data-value="intermediate">
+            <h4>Intermediate</h4>
+            <p>Some knowledge, ready for more steps</p>
+          </div>
+          <div class="option-card" data-value="advanced">
+            <h4>Advanced</h4>
+            <p>Experienced, looking for targeted solutions</p>
+          </div>
+          <div class="option-card" data-value="expert">
+            <h4>Expert</h4>
+            <p>Very knowledgeable, want professional-grade</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 5: Budget -->
+      <div class="question-slide" data-question="5">
+        <h3 class="question-title">What's your budget range?</h3>
+        <div class="options-grid">
+          <div class="option-card" data-value="budget">
+            <h4>Under $50</h4>
+            <p>Affordable, effective basics</p>
+          </div>
+          <div class="option-card" data-value="mid-range">
+            <h4>$50-$150</h4>
+            <p>Quality products with proven results</p>
+          </div>
+          <div class="option-card" data-value="premium">
+            <h4>$150-$300</h4>
+            <p>High-end formulations and ingredients</p>
+          </div>
+          <div class="option-card" data-value="luxury">
+            <h4>$300+</h4>
+            <p>Luxury skincare with cutting-edge tech</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Loading -->
+      <div class="question-slide" data-question="results">
+        <div class="results-loading">
+          <div class="loading-spinner"></div>
+          <h3>Creating your personalized routine...</h3>
+          <p>Analyzing your answers to find the perfect products for you</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="quiz-navigation">
+      <button class="nav-btn prev-btn" id="prevBtn" disabled>Previous</button>
+      <button class="nav-btn next-btn" id="nextBtn">Next</button>
+    </div>
+  </div>
+</div>
+
+<style>
+.skincare-quiz-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.quiz-container {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.quiz-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 40px 30px;
+  text-align: center;
+}
+
+.quiz-icon {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.quiz-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  line-height: 1.2;
+}
+
+.quiz-subtitle {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin: 0;
+  font-weight: 300;
+}
+
+.progress-container {
+  padding: 0 30px;
+  margin-top: -10px;
+}
+
+.progress-bar {
+  height: 6px;
+  background: #e0e7ff;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  width: 20%;
+  transition: width 0.3s ease;
+  border-radius: 3px;
+}
+
+.quiz-content {
+  padding: 40px 30px;
+  min-height: 400px;
+}
+
+.question-slide {
+  display: none;
+}
+
+.question-slide.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.question-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 30px 0;
+  text-align: center;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.option-card {
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.option-card:hover {
+  border-color: #667eea;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+}
+
+.option-card.selected {
+  border-color: #667eea;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.option-card h4 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.option-card p {
+  font-size: 0.95rem;
+  opacity: 0.8;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.option-card.selected p {
+  opacity: 0.9;
+}
+
+.results-loading {
+  text-align: center;
+  padding: 60px 0;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #e2e8f0;
+  border-top: 4px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 30px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.results-loading h3 {
+  font-size: 1.5rem;
+  color: #1f2937;
+  margin: 0 0 15px 0;
+}
+
+.results-loading p {
+  color: #6b7280;
+  font-size: 1rem;
+}
+
+.quiz-navigation {
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+}
+
+.nav-btn {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+.prev-btn {
+  background: #e2e8f0;
+  color: #64748b;
+}
+
+.prev-btn:not(:disabled):hover {
+  background: #cbd5e1;
+}
+
+.prev-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.next-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.next-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.next-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .skincare-quiz-wrapper {
+    padding: 15px;
+  }
+  
+  .quiz-header {
+    padding: 30px 20px;
+  }
+  
+  .quiz-title {
+    font-size: 1.6rem;
+  }
+  
+  .quiz-subtitle {
+    font-size: 1rem;
+  }
+  
+  .quiz-content {
+    padding: 30px 20px;
+    min-height: 350px;
+  }
+  
+  .question-title {
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+  }
+  
+  .options-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .option-card {
+    padding: 20px;
+  }
+  
+  .option-card h4 {
+    font-size: 1.2rem;
+  }
+  
+  .quiz-navigation {
+    padding: 20px;
+  }
+  
+  .nav-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Tablet Responsiveness */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .options-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .quiz-content {
+    padding: 35px 25px;
+  }
+}
+
+/* Small mobile screens */
+@media (max-width: 480px) {
+  .quiz-title {
+    font-size: 1.4rem;
+  }
+  
+  .question-title {
+    font-size: 1.3rem;
+  }
+  
+  .option-card {
+    padding: 16px;
+  }
+  
+  .nav-btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const quizData = {
+    currentQuestion: 1,
+    totalQuestions: 5,
+    answers: {}
+  };
+
+  const progressFill = document.getElementById('progressFill');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const questionSlides = document.querySelectorAll('.question-slide');
+  const optionCards = document.querySelectorAll('.option-card');
+
+  // Handle option selection
+  optionCards.forEach(card => {
+    card.addEventListener('click', function() {
+      const questionSlide = this.closest('.question-slide');
+      const questionNum = questionSlide.dataset.question;
+      const value = this.dataset.value;
+
+      // Remove selected class from other options in this question
+      questionSlide.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+      
+      // Add selected class to clicked option
+      this.classList.add('selected');
+      
+      // Store answer
+      quizData.answers[questionNum] = value;
+      
+      // Enable next button
+      nextBtn.disabled = false;
+    });
+  });
+
+  // Handle navigation
+  nextBtn.addEventListener('click', function() {
+    if (quizData.currentQuestion < quizData.totalQuestions) {
+      quizData.currentQuestion++;
+      updateQuiz();
+    } else {
+      // Show results
+      showResults();
+    }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    if (quizData.currentQuestion > 1) {
+      quizData.currentQuestion--;
+      updateQuiz();
+    }
+  });
+
+  function updateQuiz() {
+    // Update progress bar
+    const progress = (quizData.currentQuestion / quizData.totalQuestions) * 100;
+    progressFill.style.width = progress + '%';
+
+    // Show current question
+    questionSlides.forEach((slide, index) => {
+      slide.classList.toggle('active', index + 1 === quizData.currentQuestion);
+    });
+
+    // Update navigation buttons
+    prevBtn.disabled = quizData.currentQuestion === 1;
+    
+    // Check if current question has an answer
+    const hasAnswer = quizData.answers[quizData.currentQuestion];
+    nextBtn.disabled = !hasAnswer;
+    
+    // Update next button text
+    if (quizData.currentQuestion === quizData.totalQuestions) {
+      nextBtn.textContent = 'Get My Results';
+    } else {
+      nextBtn.textContent = 'Next';
+    }
+
+    // Restore selected option if returning to previous question
+    if (hasAnswer) {
+      const currentSlide = document.querySelector(`[data-question="${quizData.currentQuestion}"]`);
+      const savedOption = currentSlide.querySelector(`[data-value="${hasAnswer}"]`);
+      if (savedOption) {
+        savedOption.classList.add('selected');
+      }
+    }
+  }
+
+  function showResults() {
+    // Update progress to 100%
+    progressFill.style.width = '100%';
+    
+    // Show results slide
+    questionSlides.forEach(slide => slide.classList.remove('active'));
+    document.querySelector('[data-question="results"]').classList.add('active');
+    
+    // Hide navigation
+    document.querySelector('.quiz-navigation').style.display = 'none';
+    
+    // Simulate loading and redirect to results
+    setTimeout(() => {
+      // Here you would typically send the quiz data to your server
+      // and redirect to a results page with product recommendations
+      console.log('Quiz Results:', quizData.answers);
+      
+      // Example: redirect to results page with quiz data
+      // window.location.href = `/pages/skincare-results?data=${encodeURIComponent(JSON.stringify(quizData.answers))}`;
+      
+      // For demo purposes, show an alert
+      alert('Quiz completed! Results would be shown here.');
+    }, 3000);
+  }
+
+  // Initialize quiz
+  updateQuiz();
+});
+</script>
+
+{% schema %}
+{
+  "name": "Skincare Quiz",
+  "tag": "section",
+  "class": "section-skincare-quiz",
+  "settings": [
+    {
+      "type": "text",
+      "id": "quiz_title",
+      "label": "Quiz Title",
+      "default": "Find Your Perfect Skincare Routine"
+    },
+    {
+      "type": "text",
+      "id": "quiz_subtitle",
+      "label": "Quiz Subtitle",
+      "default": "Answer a few questions to get personalized product recommendations"
+    },
+    {
+      "type": "url",
+      "id": "results_page",
+      "label": "Results Page URL",
+      "info": "Page where users will see their personalized recommendations"
+    },
+    {
+      "type": "header",
+      "content": "Styling Options"
+    },
+    {
+      "type": "color",
+      "id": "primary_color",
+      "label": "Primary Color",
+      "default": "#667eea"
+    },
+    {
+      "type": "color",
+      "id": "secondary_color",
+      "label": "Secondary Color",
+      "default": "#764ba2"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "Skincare Quiz"
+    }
+  ]
+}
+{% endschema %}
