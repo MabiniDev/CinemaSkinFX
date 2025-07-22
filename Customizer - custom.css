@@ -1,0 +1,16 @@
+.skin-quiz-menu {
+  border: 1px solid white;
+  padding: 5px;
+  border-radius: 2px;
+  display: inline-block;
+}
+.mega-menu__link--parent {
+  font-weight: 900 !important;
+  padding-bottom: 30px;
+  position: relative;
+}
+@media (min-width: 1025px) {
+  .menu-list__submenu-inner {
+    padding-left: 620px;
+  }
+}
